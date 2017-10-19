@@ -1,5 +1,5 @@
 #include <iostream>
-using namespace as std;
+using namespace std;
 struct node
 {
   int num;
