@@ -1,0 +1,33 @@
+from msvcrt import getch
+while True:
+    print("====== Bubble Sorter =======")
+    print("Please enter the numbers you wish to sort. \nEach number must be separated by spaces")
+    a = list(map(int, input().strip().split(' ')))
+    numOfSwaps = 0
+    for _ in a:
+        for x in range(len(a)-1):
+            if a[x] > a[x+1]:
+                a[x],a[x+1] = a[x+1],a[x]
+                numOfSwaps +=1
+
+    print("Array is sorted in", numOfSwaps, "swaps.")
+    print("First Element:",a[0])
+    print("Last Element:",a[-1])
+
+    while True:
+        showAll = input("Do you wish to show entire list? (y/n)")
+        if showAll == 'y':
+            print(a)
+            break
+        elif showAll == 'n':
+            break
+        else:
+            print("Invalid input. Please type y or n")
+
+    print("Press q to quit. Any other key to try another list of numbers")
+    if getch() == b'q':
+        break
+    else:
+        continue
+
+    
