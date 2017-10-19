@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+string isBalanced(string s) {
+    stack<int> myStack;
+    string::iterator it;
+    
+    // Convention
+    // 1 ---> ( or )
+    // 2 ---> [ or ]
+    // 3 ---> { or }
+    
+    for(it = s.begin(); it < s.end(); it ++) {
+        switch(*it) {
+            case '(' : 
+                myStack.push(1);
+                break;
+                
+            case '[' : 
+                myStack.push(2);
+                break;
+                
+            case '{' : 
+                myStack.push(3);
+                break;
+                
+            case ')' : 
+                if(myStack.empty() || myStack.top() != 1)
+                    return "NO";
+                myStack.pop();
+                break;
+                
+            case ']' : 
+                if(myStack.empty() || myStack.top() != 2)
+                    return "NO";
+                myStack.pop();
+                break;
+                
+            case '}' : 
+                if(myStack.empty() || myStack.top() != 3)
+                    return "NO";
+                myStack.pop();
+                break;
+                
+            default :
+                break;
+        }
+    }
+        
+    if(myStack.empty())
+        return "YES";
+    return "NO";
+}
+
+int main() {
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        string s;
+        cin >> s;
+        string result = isBalanced(s);
+        cout << result << endl;
+    }
+    return 0;
+}
