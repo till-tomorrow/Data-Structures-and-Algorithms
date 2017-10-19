@@ -7,9 +7,9 @@ struct node
 }
 bool isEmpty(node *head);
 char menu();
-void insertAsFirst(node *&head, node *&last, int number);
-void insert(node *&head, node *&last, int number);
-void remove(node *&head, node *&last);
+void insertAsFirst(node *head, node *last, int number);
+void insert(node *head, node *last, int number);
+void remove(node *head, node *last);
 void display(node *current);
 bool isEmpty(node *head)
 {
@@ -33,7 +33,7 @@ char menu()
   cin >> choice;
   return choice;
 }
-void insertAsFirst(node *&head, node *&last, int number)
+void insertAsFirst(node *head, node *last, int number)
 {
   node *temp = new node;
   temp->num = number;
@@ -41,7 +41,7 @@ void insertAsFirst(node *&head, node *&last, int number)
   head = temp;
   last = temp;
 }
-void insert(node *&head, node *&last, int number)
+void insert(node *head, node *last, int number)
 {
   if(isEmpty(head)==true)
   {
@@ -56,7 +56,7 @@ void insert(node *&head, node *&last, int number)
     last = temp;
   }
 }
-void remove(node *&head, node *&last)
+void remove(node *head, node *last)
 {
   if(isEmpty(head))
   {
