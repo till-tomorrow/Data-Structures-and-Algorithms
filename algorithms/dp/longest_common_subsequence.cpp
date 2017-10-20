@@ -11,7 +11,7 @@ int main(){
 	int l1 = strlen(s1);
 	int l2 = strlen(s2);
 
-	int dp[l1+2][l2+2];
+	int dp[l1+1][l2+1];
 	for(i=0;i<=l1;i++){
 		for(j=0;j<=l2;j++){
 			dp[i][j] = 0;
