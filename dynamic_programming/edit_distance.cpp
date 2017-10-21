@@ -9,6 +9,9 @@ class Alignment {
 	vector<vector<int> > A;
 	int sxL, syL;
 	int cost = 0;
+	
+	//Below are the functions which are returning costs involved according to operation done in aligning strings
+	//These are arbitrary cost
 
 	//insertion cost
 	inline int insC() {
