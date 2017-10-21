@@ -10,6 +10,9 @@ using namespace std;
 //cost associated
 int cost = 0;
 
+//Below are the functions which are returning costs involved according to operation done in aligning strings
+//These are arbitrary costs
+
 //insertion cost
 inline int insC() {
 	return 4;
@@ -22,9 +25,9 @@ inline int delC() {
 
 //modification cost
 inline int modC(char fr, char to) {
-	if(fr == to)
+	if(fr == to)       //if both characters are equal
 		return 0;
-	return 3;
+	return 3;          //if both characters are not equal
 }
 
 //reversing the string
