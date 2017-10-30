@@ -4,8 +4,8 @@ public void StartSorting()
 
         int temp = 0;
 
-        for (int write = 0; write < arr.Length; write++) {
-            for (int sort = 0; sort < arr.Length - 1; sort++) {
+        for (int write = 0; write < arr.Length - 1; write++) {
+            for (int sort = 0; sort < arr.Length - write - 1; sort++) {
                 if (arr[sort] > arr[sort + 1]) {
                     temp = arr[sort + 1];
                     arr[sort + 1] = arr[sort];
