@@ -1,0 +1,164 @@
+A string matching algorithm wants to find the starting index m in string S[] that matches the search word W[].
+
+In computer science, the Knuth–Morris–Pratt string searching algorithm (or KMP algorithm) searches for occurrences of a “word” W within a main “text string” S by employing the observation that when a mismatch occurs, the word itself embodies sufficient information to determine where the next match could begin, thus bypassing re-examination of previously matched characters.
+
+Naive pattern searching algorithm uses the brute force approach to find the index of the pattern string(W) present in the text string(S). It compares each and every element of the main text string(S) with the corresponding elements in the pattern string(W) to find whether the pattern string is present in the main text string or not. It thus has the time complexity of O(m(n – m + 1))
+
+where,
+m = length of the main text string = length(S)
+n = length of the pattern string = length(W)
+Assume m > n.
+
+KMP algorithm has the time complexity of O(m + n).
+
+The KMP algorithm has a better worst-case performance than the straightforward algorithm. KMP spends a little time precomputing a table (on the order of the size of W[], O(n)), and then it uses that table to do an efficient search of the string in O(m). Let the table be lps[].
+
+The difference is that KMP makes use of previous match information that the straightforward algorithm does not.
+
+Example:
+W[] = “acacabacacabacacac”
+
+Let i and j corresponds to indices in pattern string
+
+Step 1: Initially, i = 0.
+Fill the first position in the array lps[] with 0.
+
+        ;  ______________________________________________________
+
+lps        |0|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  ------------------------------------------------------
+
+Step 2: Increment i by 1.
+j = 0.
+Since a and c are different and j = 0, therefore lps[1] = j = 0
+
+        ;  _____________________________________________________
+
+lps        |0|0|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  -----------------------------------------------------
+
+Step 3: Increment i by 1.
+j = 0.
+Since a and a are same, therefore lps[1] = j + 1 = 0 + 1 = 1
+
+        ;  ____________________________________________________
+
+lps        |0|0|1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  ----------------------------------------------------
+
+
+Step 4: Increment i by 1 and j by 1.
+i = 3, j = 1.
+Since c and c are same, therefore lps[1] = j + 1 = 1 + 1 = 2
+
+        ;  ___________________________________________________
+
+lps        |0|0|1|2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  ---------------------------------------------------
+
+
+Step 5: Increment i by 1 and j by 1.
+i = 4, j = 2.
+Since a and a are same, therefore lps[1] = j + 1 = 2 + 1 = 3
+
+        ;  _________________________________________________
+
+lps        |0|0|1|2|3|  |  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  --------------------------------------------------
+
+
+Step 6: Increment i by 1 and j by 1.
+i = 5, j = 3.
+Since c and b are different, therefore j’s new position will be lps[j-1] = lps[2] = 1
+Thus, j = 1
+Since c and b are different, therefore j’s new position will be lps[j-1] = lps[1-1] = lps[0] = 0
+j = 0.
+Since a and b are different and j = 0, therefore lps[5] = j = 0
+
+        ;  _________________________________________________
+
+lps        |0|0|1|2|3|0|  |  |  |  |  |  |  |  |  |  |  |  |
+        ;  -------------------------------------------------
+
+
+Step 7: Increment i by 1.
+i = 6, j = 0.
+Since a and a are same, therefore lps[6] = j + 1 = 0 + 1 = 1
+
+        ;  ________________________________________________
+
+lps        |0|0|1|2|3|0|1|  |  |  |  |  |  |  |  |  |  |  |
+        ;  ------------------------------------------------
+
+
+Step 8: Increment i by 1 and j by 1.
+i = 7, j = 1.
+Since c and c are same, therefore lps[7] = j + 1 = 1 + 1 = 2
+
+        ;  _______________________________________________
+
+lps        |0|0|1|2|3|0|1|2|  |  |  |  |  |  |  |  |  |  |
+        ;  -----------------------------------------------
+
+
+Step 9: Increment i by 1 and j by 1.
+i = 8, j = 2.
+Since c and c are same, therefore lps[8] = j + 1 = 2 + 1 = 3
+
+        ;  ______________________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|  |  |  |  |  |  |  |  |  |
+        ;  ----------------------------------------------
+
+
+Step 10: Increment i by 1 and j by 1.
+i = 9, j = 3.
+Since c and c are same, therefore lps[9] = j + 1 = 3 + 1 = 4
+
+        ;  _____________________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|4|  |  |  |  |  |  |  |  |
+        ;  ---------------------------------------------
+
+
+Step 11: Increment i by 1 and j by 1.
+i = 10, j = 4.
+Since c and c are same, therefore lps[9] = j + 1 = 4 + 1 = 5
+
+        ;  ____________________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|4|5|  |  |  |  |  |  |  |
+        ;  --------------------------------------------
+
+
+Step 12: Increment i by 1 and j by 1.
+i = 11, j = 5.
+Since c and c are same, therefore lps[9] = j + 1 = 5 + 1 = 6
+
+        ;  ___________________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|4|5|6|  |  |  |  |  |  |
+        ;  -------------------------------------------
+
+
+Step 13: Similarly, fill the array lps[] till index 16.
+
+        ;  ________________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|4|5|6|7|8|9|10|11|  |
+        ;  ----------------------------------------
+
+
+Step 14: Now, i = 17 and j = 11.
+Since b and c are different, j’s new position will be lps[j-1] = lps[11 – 1] = lps[10] = 5.
+j = 5.
+
+Since b and c are different, j’s new position will be lps[j-1] = lps[5 – 1] = lps[4] = 3.
+j = 3.
+
+Since c and c are same, therefore, lps[17] = j + 1 = 3 + 1 = 4
+
+        ;  _______________________________________
+
+lps        |0|0|1|2|3|0|1|2|3|4|5|6|7|8|9|10|11|4|
+        ;  ---------------------------------------
