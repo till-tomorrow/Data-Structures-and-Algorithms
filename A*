@@ -1,0 +1,113 @@
+#include <iostream>
+#include <fstream>
+#include <queue>
+
+using namespace std;
+
+#define MAX_N 100
+#define INF 100000
+
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+int dist(int crt_x, int crt_y, int fin_x, int fin_y) {
+	int dist_x = fin_x - crt_x;
+	int dist_y = fin_y - crt_y;
+
+	return (dist_x * dist_x + dist_y * dist_y);
+}
+
+int g[MAX_N][MAX_N];
+
+int main() {
+
+	ifstream in("Puzzle.in");
+  
+  /*
+  TEST INPUT
+  4 4
+  0 0
+  3 3
+  1 1 1 0
+  0 1 0 0
+  0 1 1 0
+  1 0 1 1
+  */
+
+	int N, M;
+	int A[MAX_N][MAX_N];
+
+	int i, j;
+
+	in >> N >> M;
+
+	int start_x, start_y;
+	int stop_x, stop_y;
+
+	in >> start_x >> start_y;
+	in >> stop_x >> stop_y;
+
+	for(i = 1; i <= N; i ++)
+		for(j = 1; j <= M; j ++) {
+			in >> A[i][j];
+			g[i][j] = INF;
+		}
+
+	priority_queue<pair<int, pair<int, int> >,
+			 vector<pair<int, pair<int, int> > >,
+			 greater<pair<int, pair<int, int> > > > myPrioQueue;
+
+	start_x ++;
+	start_y ++;
+	stop_x ++;
+	stop_y ++;
+
+	g[start_x][start_y] = 0;
+
+	int new_x, new_y;
+
+	int f, h;
+
+	myPrioQueue.push(make_pair(0, make_pair(start_x, start_y)));
+
+	int current_x, current_y;
+	pair<int, pair<int, int> > current;
+
+	while(!myPrioQueue.empty()) {
+		current = myPrioQueue.top();
+		myPrioQueue.pop();
+
+		current_x = current.second.first;
+		current_y = current.second.second;
+
+		f = current.first;
+
+		for(i = 0; i < 4; i ++) {
+			new_x = current_x + dx[i];
+			new_y = current_y + dy[i];
+			
+			if(new_x == 0 || new_x == N + 1 || new_y == 0 || new_y == M + 1 || !A[new_x][new_y])
+				continue;
+
+			h = dist(new_x, new_y, stop_x, stop_y);
+
+			if(g[new_x][new_y] > g[current_x][current_y] + 1) {
+				
+				g[new_x][new_y] = g[current_x][current_y] + 1;
+
+				f = h + g[new_x][new_y];
+
+				myPrioQueue.push(make_pair(f, make_pair(new_x, new_y)));
+			}
+		}
+	}
+
+	cout << "Distances from source " << start_x << " " << start_y << " to destination " << stop_x << " " << stop_y << " are:\n";
+	for(i = 1; i <= N; i ++) {
+		for(j = 1; j <= M; j ++)
+			cout << g[i][j] << " ";
+		cout << "\n";
+	}
+
+	return 0;
+}
