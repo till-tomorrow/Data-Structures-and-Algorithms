@@ -32,5 +32,5 @@ int main(){
 		}
 	}
 
-	cout<<dp[l1][l2]<<endl;
+	cout<<dp[l1 + 1][l2 + 1]<<endl;
 }
