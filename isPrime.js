@@ -1,11 +1,14 @@
 function isPrime(n) {
-    var divisor = 2;
-
-    while (n > divisor) {
-        if (n % divisor == 0) {
+   if((n > 2 && n % 2 == 0) || n == 1) {
             return false;
-        } else
-            divisor++;
-    }
-    return true;
+        }
+
+        for (int i = 3; i <= (int)Math.sqrt(n); i += 2) {
+
+            if (n % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
 }
