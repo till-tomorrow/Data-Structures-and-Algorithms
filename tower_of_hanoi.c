@@ -4,7 +4,7 @@
 // 2. Only one disc can be moved at a time
 #include <stdio.h>
 
-// recursive function
+// recursive function for finding tower of hanoi
 void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod)
 {
     if (n == 1)
